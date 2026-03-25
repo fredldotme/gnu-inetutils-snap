@@ -1,0 +1,103 @@
+name: gnu-inetutils
+adopt-info: inetutils
+license: GPL-3.0-or-later
+summary: GNU InetUtils
+description: |
+  Inetutils is a collection of common network programs. It includes:
+
+  - An inetd meta-server.
+  - An ftp client and server.
+  - A telnet client and server.
+  - An rsh client and server.
+  - An rlogin client and server.
+  - A tftp client and server.
+  - A talk client and server.
+  - A syslogd daemon.
+  - Network tools: ping, ping6, traceroute, whois.
+  - Admin tools: hostname, dnsdomainname, ifconfig, logger
+  - And more...
+confinement: strict
+base: core24
+compression: lzo
+
+platforms:
+  arm64:
+    build-on: [arm64]
+  amd64:
+    build-on: [amd64]
+  armhf:
+    build-on: [armhf]
+
+apps:
+  telnet:
+    command: usr/bin/telnet
+    plugs: [ network ]
+  whois:
+    command: usr/bin/whois
+    plugs: [ network ]
+  traceroute:
+    command: usr/bin/traceroute
+    plugs: [ network ]
+  ping:
+    command: usr/bin/ping
+    plugs: [ network ]
+  ping6:
+    command: usr/bin/ping6
+    plugs: [ network ]
+  ifconfig:
+    command: usr/bin/ifconfig
+    plugs: [ network ]
+  hostname:
+    command: usr/bin/hostname
+    plugs: [ network ]
+  ftp:
+    command: usr/bin/ftp
+    plugs: [ network ]
+  dnsdomainname:
+    command: usr/bin/dnsdomainname
+    plugs: [ network ]
+  rlogin:
+    command: usr/bin/rlogin
+    plugs: [ network ]
+  rsh:
+    command: usr/bin/rsh
+    plugs: [ network ]
+  tftp:
+    command: usr/bin/tftp
+    plugs: [ network ]
+
+lint:
+  ignore:
+    - classic
+    - library
+
+layout:
+  /usr/share/locale:
+    bind: $SNAP/usr/share/locale
+
+parts:
+  inetutils:
+    source: https://ftp.gnu.org/gnu/inetutils/inetutils-v2.7-src.tar.gz
+    plugin: autotools
+    autotools-configure-parameters:
+      - --prefix=/usr
+    override-build: |
+      cd $CRAFT_PART_SRC
+      craftctl set version="2.7"
+      craftctl default
+    override-prime: |
+      craftctl default
+    build-packages:
+      - build-essential
+      - gettext
+      - libssl-dev
+      - libexpat1-dev
+      - zlib1g-dev
+      - bison
+      - help2man
+      - texinfo
+      - git
+    stage-packages:
+      - gettext
+      - libcurl4-openssl-dev
+      - zlib1g
