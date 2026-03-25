@@ -87,6 +87,7 @@ parts:
       craftctl default
     override-prime: |
       craftctl default
+      chmod 755 $CRAFT_PRIME/usr/bin/*
     build-packages:
       - build-essential
       - gettext
