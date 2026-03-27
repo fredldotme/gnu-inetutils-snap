@@ -74,6 +74,8 @@ lint:
 layout:
   /usr/share/locale:
     bind: $SNAP/usr/share/locale
+  /usr/bin/rlogin:
+    symlink: $SNAP/usr/bin/rlogin
 
 parts:
   inetutils:
