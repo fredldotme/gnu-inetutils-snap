@@ -37,16 +37,16 @@ apps:
     plugs: [ network ]
   traceroute:
     command: usr/bin/traceroute
-    plugs: [ network ]
+    plugs: [ network, network-control ]
   ping:
     command: usr/bin/ping
-    plugs: [ network ]
+    plugs: [ network, network-observe ]
   ping6:
     command: usr/bin/ping6
-    plugs: [ network ]
+    plugs: [ network, network-observe ]
   ifconfig:
     command: usr/bin/ifconfig
-    plugs: [ network-control ]
+    plugs: [ network, network-control ]
   hostname:
     command: usr/bin/hostname
     plugs: [ network ]
