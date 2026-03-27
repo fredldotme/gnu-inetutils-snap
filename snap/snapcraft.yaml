@@ -46,13 +46,13 @@ apps:
     plugs: [ network ]
   ifconfig:
     command: usr/bin/ifconfig
-    plugs: [ network ]
+    plugs: [ network-control ]
   hostname:
     command: usr/bin/hostname
     plugs: [ network ]
   ftp:
     command: usr/bin/ftp
-    plugs: [ network ]
+    plugs: [ network, home, removable-media ]
   dnsdomainname:
     command: usr/bin/dnsdomainname
     plugs: [ network ]
@@ -64,7 +64,7 @@ apps:
     plugs: [ network ]
   tftp:
     command: usr/bin/tftp
-    plugs: [ network ]
+    plugs: [ network, home, removable-media ]
 
 lint:
   ignore:
